@@ -20,7 +20,7 @@ export const getStaticProps: GetServerSideProps = async ({ params }) => {
     },
   })
   return {
-    props: post,revalidate: 10
+    props: post,revalidate: 3
   }
 }
 
