@@ -8,7 +8,7 @@ import { PostProps } from '../../components/Post'
 import { useSession } from 'next-auth/client'
 import prisma from '../../lib/prisma'
 
-export const getServerSideProps: GetServerSideProps = async ({ params }) => {
+export const getStaticProps: GetServerSideProps = async ({ params }) => {
   const post = await prisma.post.findUnique({
     where: {
       id: Number(params?.id) || -1,
@@ -20,7 +20,7 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
     },
   })
   return {
-    props: post,
+    props: post,revalidate: 3
   }
 }
 
@@ -29,6 +29,13 @@ async function publishPost(id: number): Promise<void> {
     method: 'PUT',
   })
   await Router.push('/')
+}
+
+export const getStaticPaths = async (req) => {
+  return {
+    paths: [],
+    fallback: "blocking"
+  }
 }
 
 async function publishPost2(id: number): Promise<void> {
