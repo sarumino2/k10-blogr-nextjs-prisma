@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from 'next/link'
 import { GetServerSideProps } from 'next'
 import ReactMarkdown from 'react-markdown'
 import Layout from '../../components/Layout'
@@ -30,6 +31,12 @@ async function publishPost(id: number): Promise<void> {
   await Router.push('/')
 }
 
+async function publishPost2(id: number): Promise<void> {
+  await fetch(`https://k10-blogr-nextjs-prisma-sarumino2.vercel.app/api/publish/${id}`, {
+    method: 'PUT',
+  })
+}
+
 async function deletePost(id: number): Promise<void> {
   await fetch(`https://k10-blogr-nextjs-prisma-sarumino2.vercel.app/api/post/${id}`, {
     method: 'DELETE',
@@ -58,6 +65,13 @@ const Post: React.FC<PostProps> = (props) => {
           {
             !props.published && userHasValidSession && postBelongsToUser && (
                 <button onClick={() => publishPost(props.id)}>Publish</button>
+            )
+          }
+          {
+            !props.published && userHasValidSession && postBelongsToUser && (
+                <a onClick={() => publishPost2(props.id)} href={`/`}>
+                  Publish LINK
+                </a>
             )
           }
           {
