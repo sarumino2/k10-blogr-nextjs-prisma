@@ -34,7 +34,7 @@ async function publishPost(id: number): Promise<void> {
 export const getStaticPaths = async (req) => {
   return {
     paths: [],
-    fallback: "blocking"
+    fallback:true
   }
 }
 
