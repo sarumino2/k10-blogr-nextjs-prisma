@@ -31,12 +31,12 @@ async function publishPost(id: number): Promise<void> {
   await Router.push('/')
 }
 
-export const getStaticPaths = async (req) => {
-  return {
-    paths: [],
-    fallback:true
-  }
-}
+// export const getStaticPaths = async (req) => {
+//   return {
+//     paths: [],
+//     fallback:true
+//   }
+// }
 
 async function publishPost2(id: number): Promise<void> {
   await fetch(`https://k10-blogr-nextjs-prisma-sarumino2.vercel.app/api/publish/${id}`, {
