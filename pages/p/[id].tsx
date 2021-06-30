@@ -38,12 +38,6 @@ export const getStaticPaths = async (req) => {
   }
 }
 
-async function publishPost2(id: number): Promise<void> {
-  await fetch(`https://k10-blogr-nextjs-prisma-sarumino2.vercel.app/api/publish/${id}`, {
-    method: 'PUT',
-  })
-}
-
 async function deletePost(id: number): Promise<void> {
   await fetch(`https://k10-blogr-nextjs-prisma-sarumino2.vercel.app/api/post/${id}`, {
     method: 'DELETE',
@@ -72,13 +66,6 @@ const Post: React.FC<PostProps> = (props) => {
           {
             !props.published && userHasValidSession && postBelongsToUser && (
                 <button onClick={() => publishPost(props.id)}>Publish</button>
-            )
-          }
-          {
-            !props.published && userHasValidSession && postBelongsToUser && (
-                <a onClick={() => publishPost2(props.id)} href={`/`}>
-                  Publish LINK
-                </a>
             )
           }
           {

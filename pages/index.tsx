@@ -8,6 +8,9 @@ import prisma from '../lib/prisma'
 export const getServerSideProps: GetStaticProps = async () => {
   const feed = await prisma.post.findMany({
     where: { published: true },
+    orderBy: {
+      id: "desc"
+    },
     include: {
       author: {
         select: { name: true },
