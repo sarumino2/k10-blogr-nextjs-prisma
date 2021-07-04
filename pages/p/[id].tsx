@@ -25,7 +25,7 @@ export const getStaticProps: GetServerSideProps = async ({ params }) => {
 }
 
 async function publishPost(id: number): Promise<void> {
-  await fetch(`https://k10-blogr-nextjs-prisma-sarumino2.vercel.app/api/publish/${id}`, {
+  await fetch(`${process.env.BASE_URL}/api/publish/${id}`, {
     method: 'PUT',
   })
   await Router.push('/')
@@ -39,10 +39,10 @@ export const getStaticPaths = async (req) => {
 }
 
 async function deletePost(id: number): Promise<void> {
-  await fetch(`https://k10-blogr-nextjs-prisma-sarumino2.vercel.app/api/post/${id}`, {
+  await fetch(`${process.env.BASE_URL}/api/post/${id}`, {
     method: 'DELETE',
   })
-  Router.push('/')
+  await Router.push('/')
 }
 
 const Post: React.FC<PostProps> = (props) => {
